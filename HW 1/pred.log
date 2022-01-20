@@ -1,0 +1,2 @@
+(Forall x. P(x)) -> (Forall y. Q(y)) => (Exists y. ~Q(y)) -> (Exists x. ~(P(x)))
+(Forall x. P(x)) -> (Forall y. Q(y))
