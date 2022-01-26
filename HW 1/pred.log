@@ -1,2 +1,8 @@
 (Forall x. P(x)) -> (Forall y. Q(y)) => (Exists y. ~Q(y)) -> (Exists x. ~(P(x)))
 (Forall x. P(x)) -> (Forall y. Q(y))
+~(Forall x. P(x)) \/ (Forall y. Q(y))			DC
+(Exists x. ~P(x)) \/ (Forall y. Q(y))			DM
+(Forall y. Q(y)) \/ (Exists x. ~P(x))			CAI
+~~(Forall y. Q(y)) \/ (Exists x. ~P(x))			DNE
+~(Exists y. ~Q(y)) \/ (Exists x. ~P(x))			DM
+(Exists y. ~Q(y)) -> (Exists x. ~(P(x)))		DC

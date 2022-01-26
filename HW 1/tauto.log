@@ -1,2 +1,11 @@
 T => ((P -> Q) /\ ~P) \/ P
 T
+T \/ Q										Dom
+P \/ ~P \/ Q								LEM
+~P \/ Q \/ P								CAI
+(~P \/ Q) \/ P								CAI
+((~P \/ Q) \/ P)							CAI
+((~P \/ Q) \/ P) /\ T						ID
+((~P \/ Q) \/ P) /\ (~P \/ P)				LEM
+((~P \/ Q) /\ ~P) \/ P						Dist
+((P -> Q) /\ ~P) \/ P						DC

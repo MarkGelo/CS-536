@@ -1,2 +1,10 @@
 P -> (Q -> R) => (P /\ Q) -> R
 P -> (Q -> R)
+P -> (~Q \/ R)				DC
+~P \/ (~Q \/ R)				DC
+~P \/ ~Q \/ R				CAI
+~Q \/ ~P \/ R				CAI
+(~Q \/ ~P) \/ R				CAI
+~(Q /\ P) \/ R				DM
+~(P /\ Q) \/ R				CAI
+(P /\ Q) -> R				DC

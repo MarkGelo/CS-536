@@ -1,0 +1,223 @@
+% https://github.com/jdavis/latex-homework-template
+% https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts} % for "\mathbb" macro
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usetikzlibrary{automata,positioning}
+\newcommand{\indentitem}{\setlength\itemindent{25pt}}
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClassID\ \hmwkTitle}
+\rhead{} % blank, to remove the latest section in page
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\setcounter{secnumdepth}{0}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#1}
+\newcommand{\hmwkDueDate}{January 26, 2022}
+\newcommand{\hmwkClass}{Science of Programming}
+\newcommand{\hmwkClassID}{CS 536}
+\newcommand{\hmwkClassInstructor}{Stefan Muller}
+\newcommand{\hmwkAuthorName}{\textbf{Mark Gameng}}
+
+%
+% Title Page
+%
+
+\author{\hmwkAuthorName}
+\date{}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\answer}{\item[]} %new code
+
+\begin{document}
+	
+	%\maketitle
+	
+	\section{Task 1.1}
+	
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\item When you do this, the program is guaranteed to work as intended.
+			\answer \textbf{Verification and testing}. Without both, it wouldn't be 'guaranteed' to work as intended due to possible bugs, security properties, or not known cases. Verification and testing makes sure the program works correctly and meets specification and makes sure it doesn't break or have bugs.
+			
+			\item The code’s been in use for 10 years and nobody’s seen a bug.
+			\answer \textbf{Testing}. Basically been 'tested' for 10 years and works with no known bugs.
+			
+			\item I have a proof that the code will meet its specification.
+			\answer \textbf{Verification}. Checks that the code is 'correct' and that it meets specification.
+			
+			\item I expect the code to produce an integer, so I wrote it in a statically typed language, annotated the code with the type “int” and it compiled.
+			\answer \textbf{Verification}. The specification is it produces an integer and it meets that specification. 
+			
+			\item Doing this on a piece of code can give you more confidence that it will work correctly.
+			\answer \textbf{Verification and testing}. Formally checking that a program is correct and that it meets specification or testing allows you to make sure that the code will work correctly and have no devastating bugs.
+			
+		\end{enumerate}
+	
+	\section{Task 1.2}
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\item $p \land q \lor r \qquad \qquad r \lor q \land p$
+			\answer \textbf{Semantically equal}.  Commutative and Associative.
+			
+			\item $p \land q \lor r \qquad \qquad p \land r \lor q$
+			\answer \textbf{Neither}
+			
+			\item $\neg p \lor q \to \neg(p \land \neg q) \qquad \qquad ((\neg p) \lor q) \to \neg (p \land (\neg q))$
+			\answer \textbf{Syntactically equal therefore also semantically equal}. Removing the unnecessary parenthesis results in the LHS.
+			
+			\item $p \to q \qquad \qquad \neg p \to \neg q$
+			\answer \textbf{Neither}
+			
+			\item $p \land \neg p \qquad \qquad F$
+			\answer \textbf{Semantically equal}. $p \land \neg p$ is a contradiction. 
+			
+		\end{enumerate}
+		
+	\pagebreak
+	
+	\section{Task 2.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item $(P \to (Q \to R)) \leftrightarrow ((P \to Q) \to R)$
+			\answer \textbf{Contingency}. P = Q = R = False results in False. P = Q = False and R = True results in True.
+			
+			\item $(P \to Q) \leftrightarrow (\neg Q \to \neg P)$
+			\answer \textbf{Tautology}
+			
+			\item $\neg P \land Q \leftrightarrow \neg Q \land P$
+			\answer \textbf{Contingency}. P = Q = False results in True. P = False and Q = True results in False.
+			
+		\end{enumerate}
+	
+	\section{Task 2.2}
+		\begin{itemize}
+			
+			\answer Included in the assignment submission is the file, \textbf{tauto.log}, which has the proof for this task.
+			
+		\end{itemize}
+	
+	\section{Task 2.3}
+		\begin{itemize}
+			
+			\answer In the previous task, we didn't prove that the statement was a tautology by proving \newline
+			$((P \to Q) \land \neg P) \lor P \Rightarrow T$ because this says that we already know that the statement logically implies True. We are trying to prove that it is a tautology, so instead, we start with $T \Rightarrow ((P \to Q) \land \neg P) \lor P$.
+			
+		\end{itemize}
+	
+	\section{Task 2.4}
+		\begin{itemize}
+			
+			\answer Included in the assignment submission is the file, \textbf{uncurry.log}, which has the proof for this task.
+			
+		\end{itemize}
+	
+	\pagebreak
+	
+	\section{Task 3.1}
+		\begin{itemize}
+			
+			\answer $\forall x \in A . \exists min,max \in A . min <= x <= max$
+			\newline
+			For all x in A, there exists a min and a max such that $min <= x <= max$. Thus, A is finite and has a minimum and maximum element.
+			
+		\end{itemize}
+	
+	\section{Task 3.2}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item $\forall x \in \Z . \exists y \in \Z . x = y * 2$
+			\answer \textbf{False}. With x = 3, y has to be 1.5, but y can only be an integer. Thus the statement is false.
+			
+			\item $\exists x \in \Z . \neg(\exists a \in \Z . \exists b \in \Z . a > 1 \land b > 1 \land a * b = x)$
+			\newline
+			$\exists x \in \Z . \forall a \in \Z . \forall b \in \Z . a < 1 \lor b < 1 \lor a * b \neq x$
+			\answer \textbf{True}. By simplifying and using DeMorgan's Law, the statement is easier to understand. We can use x = 3, a = 0, and b = -2 as a witness. 
+			
+			\item $\forall x \in \Z . \exists y \in \Z . y = x * 2$
+			\answer \textbf{True}. With $x \in \Z$, then $x * 2 \in \Z$. Thus, the statement is true, $\exists y \in \Z . y = x * 2$.
+			
+		\end{enumerate}
+	
+	\section{Task 3.3}
+		\begin{itemize}
+			
+			\answer Included in the assignment submission is the file, \textbf{pred.log}, which has the proof for this task.
+			
+		\end{itemize}
+	
+	\section{Task 4.1}
+		\begin{itemize}
+			
+			\answer I spent about 5 hours of actual working time on this homework. Though that is mostly because I had to tinker around the proof checker, relearn LaTeX, and review certain things. Even then, some of the answers, I am still unsure of.
+			
+		\end{itemize}
+	
+\end{document}
