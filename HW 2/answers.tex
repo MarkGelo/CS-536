@@ -1,0 +1,206 @@
+% https://github.com/jdavis/latex-homework-template
+% https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts} % for "\mathbb" macro
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usetikzlibrary{automata,positioning}
+\newcommand{\indentitem}{\setlength\itemindent{25pt}}
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClassID\ \hmwkTitle}
+\rhead{} % blank, to remove the latest section in page
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\setcounter{secnumdepth}{0}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#2}
+\newcommand{\hmwkDueDate}{February 7, 2022}
+\newcommand{\hmwkClass}{Science of Programming}
+\newcommand{\hmwkClassID}{CS 536}
+\newcommand{\hmwkClassInstructor}{Stefan Muller}
+\newcommand{\hmwkAuthorName}{\textbf{Mark Gameng}}
+
+%
+% Title Page
+%
+
+\author{\hmwkAuthorName}
+\date{}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\answer}{\item[]} %new code
+
+\begin{document}
+	
+	%\maketitle
+	
+	\section{Task 1.1}
+	
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\item
+			$\begin{aligned}[t]
+				\sigma [x \mapsto 4] [x \mapsto 8] &= \{ x = 1, y = 3, b = [4;5;6;7] \} [x \mapsto 4] [x \mapsto 8] \\
+				&= \{ x = 4, y = 3, b = [4;5;6;7] \} [x \mapsto 8] \\
+				&= \{ x = 8, y = 3, b = [4;5;6;7] \}
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				\sigma [y \mapsto 9] (x) &= \{ x = 1, y = 3, b = [4;5;6;7] \} [y \mapsto 9] (x) \\
+				&= \{ x = 1, y = 9, b = [4;5;6;7] \} (x) \\
+				&= 1
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				\sigma [x \mapsto 2] [z \mapsto 4] &= \{ x = 1, y = 3, b = [4;5;6;7] \} [x \mapsto 2] [z \mapsto 4] \\
+				&= \{ x = 2, y = 3, b = [4;5;6;7] \} [z \mapsto 4] \\
+				&= \{ x = 2, y = 3, b = [4;5;6;7], z = 4 \}
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+	\section{Task 1.2}
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\item Yes because $\{y = 3, x = 2 \} \models x < y$ holds.
+			
+			\item No because $\{x = 17, y = 4\} \not\models x \leq y^2 $
+			
+			\item Yes because $b[0] > 0$ and $b[1] > 0$
+			
+			\item Yes because with $j = 0$ then $\{x = 2, y = 6, b = [1;6;8]\} \models (\exists x \in \Z . \exists j \in \Z . b[j] < x \land x < y)$
+			
+		\end{enumerate}
+	
+	\section{Task 1.3}
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\answer
+			$x = 2y + z$, $y = 2z$, $z = b[0] + b[2]$, and $4 < b[1] < b[2] < 7$ and $z = 8$ \\
+			We can get $b[1], b[2] = 5, 6$ from $4 < b[1] < b[2] < 7$ \\
+			Using $z = 8$ with all the other variables we got, we can get $b[0] = z - b[2] = 8 - 6 = 2$, $y = 2z = 2 * 8 = 16$, $x = 2y + z = 2 * 16 + 8 = 40$ \\
+			Thus, \\
+			$\sigma = \{x = 40, y = 16, z = 8, b = [2, 5, 6] \}$
+			
+		\end{enumerate}
+	
+	\section{Task 1.4}
+	\begin{enumerate}[label={(\alph*)}]
+		
+		\item $\models (\exists x \in \Z . x < 0)$ if for \textbf{all} states $\sigma$, it is true that $\sigma [x \mapsto n] \models x < 0$, for \textbf{some} $n \in \Z$
+		
+		\item $\models (\forall x \in \Z . x < 0)$ if for \textbf{all} states $\sigma$, it is true that $\sigma [x \mapsto n] \models x < 0$, for \textbf{all} $n \in \Z$
+		
+		\item $\models (\exists x \in \Z . \forall y \in \Z . x < y^2)$ if for \textbf{all} states $\sigma$, it is true that $\sigma [x \mapsto n] [y \mapsto m] \models x < y^2$, for \textbf{some} $n \in \Z$, and for \textbf{all} $m \in \Z$
+		
+	\end{enumerate}
+		
+	\pagebreak
+	
+	\section{Task 2.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item Legal
+			
+			\item Legal
+			
+			\item Illegal because b and c are not expressions. $(e ? e : e)$. Can instead do $(x = 2 ? b[y] : b[y])$
+			
+			\item Legal
+			
+			\item Illegal. $d$ is 2-dimensional while $b$ is 1-dimensional.
+			
+		\end{enumerate}
+	
+	\section{Task 2.2}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item $\sigma (x + y) = \sigma (x) + \sigma(y) = 5 + 2 = 7$
+			
+			\item $\sigma (x * a[y]) = \sigma (x) * \sigma (a[y]) = \sigma (x) * \sigma (a)[\sigma(y)]= 5 * a[2] = 5 * 6 = 30$
+			
+			\item $\sigma (max(a[x - 4], a[y])) = max(\sigma (a[x - 4]), \sigma (a[y])]) = max(a[1], a[2]) = max(5, 6) = 6$
+			
+			\item $\sigma (x > y ? a[x - 4]: a[y]) = \sigma (x > y) ? \sigma (a[x - 4]): \sigma (a[y]) = 5 > 2 ? a[1]: a[2] = True ? 5: 6 = 5$
+			
+			\item $\sigma (a[size(a) - y]) = \sigma (a[3 - 2])] = \sigma (a[1]) = 5$
+			
+		\end{enumerate}
+	
+	\section{Task 3.1}
+		\begin{itemize}
+			
+			\answer I spent about 2 hours on this.
+			
+		\end{itemize}
+	
+\end{document}
