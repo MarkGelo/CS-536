@@ -1,0 +1,208 @@
+% https://github.com/jdavis/latex-homework-template
+% https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts} % for "\mathbb" macro
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usetikzlibrary{automata,positioning}
+\newcommand{\indentitem}{\setlength\itemindent{25pt}}
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClassID\ \hmwkTitle}
+\rhead{} % blank, to remove the latest section in page
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\setcounter{secnumdepth}{0}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#3}
+\newcommand{\hmwkDueDate}{February 21, 2022}
+\newcommand{\hmwkClass}{Science of Programming}
+\newcommand{\hmwkClassID}{CS 536}
+\newcommand{\hmwkClassInstructor}{Stefan Muller}
+\newcommand{\hmwkAuthorName}{\textbf{Mark Gameng}}
+
+%
+% Title Page
+%
+
+\author{\hmwkAuthorName}
+\date{}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\answer}{\item[]} %new code
+
+\begin{document}
+	
+	%\maketitle
+	
+	\section{Task 1.1}
+	
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\answer $i = 0; while(i < size(a))\{x = x + a[i]; i = i + 1 \}$
+			
+		\end{enumerate}
+	
+	\section{Task 2.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item 
+			$\begin{aligned}[t]
+				& <s, {n = 5}> \\
+				&\rightarrow \quad <b; s, {n = 5}> \\
+				&\rightarrow \quad <n = 3 * n + 1; s, {n = 5}> \\
+				&\rightarrow \quad <s, {n = 16}> \\
+				&\rightarrow \quad <b; s, {n = 16}> \\
+				&\rightarrow \quad <n = n / 2; s, {n = 16}> \\
+				&\rightarrow \quad <s, {n = 8}> \\
+				&\rightarrow \quad <b; s, {n = 8}> \\
+				&\rightarrow \quad <n = n / 2; s, {n = 8}> \\
+				&\rightarrow \quad <s, {n = 4}> \\
+				&\rightarrow \quad <b; s, {n = 4}> \\
+				&\rightarrow \quad <n = n / 2; s, {n = 4}> \\
+				&\rightarrow \quad <s, {n = 2}> \\
+				&\rightarrow \quad <b; s, {n = 2}> \\
+				&\rightarrow \quad <n = n / 2;s, {n = 2}> \\
+				&\rightarrow \quad <s, {n = 1}> \\
+				&\rightarrow \quad <skip, {n = 1}> \\
+			\end{aligned}$
+			
+			\item $M(s, \sigma) = \{\{n = 1\}\}$
+			
+		\end{enumerate}
+	
+	\section{Task 2.2}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item $M(s, \sigma) = \{\bot_{d} \}$
+			
+			\item $M(s, \sigma) = \{ \{n = 0\}\}$
+			
+			\item $M(s, \sigma) = \{ \{n = -1\}\}$
+			
+			\item $M(s, \sigma) = M(y := a[x], \sigma) = \{ \{x = 1, a = [0, 3, 2, 1], y = 3 \}\}$
+			
+			\item $M(s, \sigma) = M(z := 0, \sigma) = \{ \{x = -1, a = [0, 3, 2, 1], z = 0\}\}$
+			
+			\item $M(s, \sigma) = M(y := a[x], \{x = 5, a = [0, 3, 2, 1], z = 0\}) = \{\bot_{e}\}$
+			
+		\end{enumerate}
+	
+	\pagebreak
+	
+	\section{Task 3.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item \textbf{Unsatisfied}. Post-condition is false, as $i$ becomes 0. 
+			
+			\item \textbf{Satisfied}. Pre-condition and post-condition passes. $i = 0 \land i \geq 0$ and $x = 6 \land x \geq 1$.
+			
+			\item \textbf{Satisfied}. Same reason as above. Program doesn't terminate and errors.
+			
+			\item \textbf{Satisfied}. Pre-condition is false thus, the triple is satisfied.
+			
+			\item \textbf{Satisfied}. Same reason as above.
+			
+			\item \textbf{Unsatisfied}. Post-condition is false, as $x = 0$.
+			
+			\item \textbf{Unsatisfied}. Post-condition is false, since $i$ is updated throughout the program. At the end, $i = 0$, $x = 6$, and thus, $x \neq 0!$ or $x \neq 1$.
+			
+			\item \textbf{Satisfied}. Fixes the previous problem by saving $i$ in another variable, k. Precondition and post-condition passes. At the end, $i = 0 \land x = 6 \land k = 3$ and thus, $x = k!$.
+			
+		\end{enumerate}
+	
+	\section{Task 3.2}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item Valid. If $y = 0$ then causes an error which is fine for partial correctness. For all other states, they terminate in a state satisfying the post-condition.
+			
+			\item Not valid since with $y = 0$ leads to runtime error, $x / 0$. Fixed: $[x \geq 0 \land y > 0] z:= x / y [z \geq 0]$
+			
+			\item Valid
+			
+			\item Not valid, since we don't know the contents of array, $a$. They can be negative which makes the post condition false. So, I changed the program and to make it use the absolute value instead. Fixed: $\{i \geq 0 \land i < |a|\} x := |a[i]| \{x \geq 0\}$
+			
+		\end{enumerate}
+	
+	\section{Task 3.3}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\answer Since $r := r * (-2)$, we need to make n be even so that it ends on a positive and passes the post-condition.
+			$[r = 1 \land \exists k \in \Z . n = 2 * k] m := n;$ while $n \neq 0 \{r := r * (-2); n := n - 1\}[r = 2^m]$
+		
+		\end{enumerate}
+	
+	\section{Task 4.1}
+		\begin{itemize}
+			
+			\answer I spent about 3 hours on this.
+			
+		\end{itemize}
+	
+\end{document}
