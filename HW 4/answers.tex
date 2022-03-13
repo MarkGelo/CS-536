@@ -1,0 +1,200 @@
+% https://github.com/jdavis/latex-homework-template
+% https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts} % for "\mathbb" macro
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usetikzlibrary{automata,positioning}
+\newcommand{\indentitem}{\setlength\itemindent{25pt}}
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClassID\ \hmwkTitle}
+\rhead{} % blank, to remove the latest section in page
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\setcounter{secnumdepth}{0}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#4}
+\newcommand{\hmwkDueDate}{March 11, 2022}
+\newcommand{\hmwkClass}{Science of Programming}
+\newcommand{\hmwkClassID}{CS 536}
+\newcommand{\hmwkClassInstructor}{Stefan Muller}
+\newcommand{\hmwkAuthorName}{\textbf{Mark Gameng}}
+
+%
+% Title Page
+%
+
+\author{\hmwkAuthorName}
+\date{}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\answer}{\item[]} %new code
+
+\begin{document}
+	
+	%\maketitle
+	
+	\section{Task 1.1}
+	
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\item $[y+x/x](2x + y \geq z) = 2(y + x) + y \geq z = 3y + 2x \geq z$
+			
+			\item
+			$\begin{aligned}[t]
+				& [z/x](x \geq 0 \to (\forall x . x * z > y) \land x > -1)\\
+				&= (x \geq 0)[z/x] \to (\forall x . x * z > y)[z/x] \land (x > -1)[z/x] \\
+				&= z \geq 0 \to (\forall x . x * z > y) \land z > -1 \\
+			\end{aligned}$
+			
+			\item $[x/y]\forall x . (y > 0 \to \exists y . y = x) = \forall x . (x > 0 \to \exists y . y = x)$
+			
+			\item $[x+2/x]\exists x . \forall y . x > y = \exists x . \forall y . x > y$
+			
+		\end{enumerate}
+	
+	\section{Task 2.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\answer $\{x \neq y\}\; $if$\; y > x \; $then$ \; \{t := x; x := y; y := t\} \; $else$ \; \{$skip$\} \; \{x > y\}$ \\ \\
+			$\begin{aligned}[t]
+				&\{x \neq y\} \qquad & \\
+				&\text{if}(y > x)\{ &\{x \neq y \land y > x\} \\
+				&\quad t:= x &\{x \neq y \land y > x \land t = x\} \\
+				&\quad x:= y &\{x \neq y \land y > x \land t = x \land x = y\} \Rightarrow \{t = x_{0} \land x = y_{0} \land y_{0} > x_{0}\} \\
+				&\quad y:= t &\{t = x_{0} \land x = y_{0} \land y = t \land y_{0} > x_{0}\} \Rightarrow \{x = y_{0} \land y = x_{0} \land y_{0} > x_{0}\} \Rightarrow \{x > y\} \\
+				&\} \text{else} \{ &\{x \neq y \land y < x\} \\
+				&\quad \text{skip} &\{x \neq y \land x > y\} \Rightarrow \{x > y\}\\
+				&\} &\{x > y \lor x > y\} \Rightarrow \{x > y\} \\
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+	\section{Task 2.2}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\answer
+			$\begin{aligned}[t]
+				&1.\quad \{x = 0 \land 0 = 0\} s := 0 \{x = 0 \land s = 0\} \qquad & \text{Assign} \\
+				&2.\quad \{x < 0 \land -1 = -1\}s := -1 \{s = x/|x|\} & \text{Assign} \\
+				&3.\quad \{x > 0 \land 1 = 1\}s := 1 \{s = x/|x|\} & \text{Assign} \\
+				&4.\quad \{\text{T}\}\; \text{if} \; ... \{s = x/|x| \lor s = x/|x|\} & \text{if} \; 2,3 \\
+				&5.\quad \{\text{T}\}\; \text{if} \; ... \{s = x/|x|\} & \text{Weakening} \; 4 \\
+				&6.\quad \{\text{T}\}\; \text{if} \; ... \{(x = 0 \land s = 0) \lor s = x/|x|\} & \text{if} \; 1,4 \\
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+	\pagebreak
+	
+	\section{Task 3.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item $wlp(x := x + y; n := x * z, n = 0) \equiv z = 0$
+			
+			\item
+			$\begin{aligned}[t]
+				&wp(\text{if} \; x = y \; \text{then} \; \{z := 1\} \; \text{else} \; \{z := x/y\}, z = 1) \\
+				&\equiv (x = y \to wp(z := 1, z = 1)) \land (x \neq y \to wp(z := x / y, z = 1)) \\
+				&\equiv (x = y \to 1 = 1) \land (x \neq y \to y \neq 0 \land x/y = 1) \\
+				&\equiv \text{T} \land (x \neq y \to y \neq 0 \land x/y = 1) \\
+				&\equiv x \neq y \to y \neq 0 \land x/y = 1 \\
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				&sp(x = 1, \; \text{if} \; y > 0 \; \text{then} \; {x := x + 1} \; \text{else} \; \{\text{skip}\})\\
+				&\equiv sp(x = 1 \land y > 0, x := x + 1) \; \lor \; sp(x = 1 \land \neg (y > 0), \text{skip}) \\
+				&\equiv ([x_{0}/x](x = 1 \land y > 0) \land x = [x_{0}/x](x + 1)) \; \lor \; sp(x = 1 \land y \leq 0, \text{skip}) \\
+				&\equiv ((x_{0} = 1 \land y > 0) \land x = x_{0} + 1) \; \lor \; (x = 1 \land y \leq 0) \\
+				&\equiv (y > 0 \land x = 2) \; \lor \; (x = 1 \land y \leq 0) \\
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				&sp(x \geq 0, x := 1; \; \text{if} \; x > 0 \; \text{then} \; \{x := x - 1\} \; \text{else} \; {x := 0}) \\
+				&\equiv sp(sp(x \geq 0, x := 1), \; \text{if} \; x > 0 \; \text{then} \; \{x := x - 1\} \; \text{else} \; {x := 0}) \\
+				&\equiv sp([x_{0}/x] (x \geq 0) \land x = [x_{0}/x]1, \; \text{if} \; x > 0 \; \text{then} \; \{x := x - 1\} \; \text{else} \; {x := 0}) \\
+				&\equiv sp(x_{0} \geq 0 \land x = 1, \; \text{if} \; x > 0 \; \text{then} \; \{x := x - 1\} \; \text{else} \; {x := 0}) \\
+				&\equiv sp(x_{0} \geq 0 \land x = 1 \land x > 0, x := x - 1) \; \lor \; sp(x_{0} \geq 0 \land x = 1 \land \neg (x > 0), x := 0)\\
+				&\equiv ([x_{1}/x](x_{0} \geq 0 \land x = 1 \land x > 0) \land x = [x_{1}/x](x - 1)) \; \lor \; ([x_{1}/x](x_{0} \geq 0 \land x = 1 \land x \leq 0) \land x = [x_{1}/x]0)\\
+				&\equiv (x_{0} \geq 0 \land x_{1} = 1 \land x_{1} > 0 \land x = x_{1} - 1) \; \lor \; (x_{0} \geq 0 \land x_{1} = 1 \land x_{1} \leq 0 \land x = 0)\\
+				&\equiv x_{0} \geq 0 \land x_{1} = 1 \land x_{1} > 0 \land x = x_{1} - 1 \\
+			\end{aligned}$
+		\end{enumerate}
+	
+	\section{Task 4.1}
+		\begin{itemize}
+			
+			\answer I spent about 4 hours on this.
+			
+		\end{itemize}
+	
+\end{document}
