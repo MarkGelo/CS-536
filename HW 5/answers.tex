@@ -1,0 +1,211 @@
+% https://github.com/jdavis/latex-homework-template
+% https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts} % for "\mathbb" macro
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usetikzlibrary{automata,positioning}
+\newcommand{\indentitem}{\setlength\itemindent{25pt}}
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClassID\ \hmwkTitle}
+\rhead{} % blank, to remove the latest section in page
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\setcounter{secnumdepth}{0}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#5}
+\newcommand{\hmwkDueDate}{April 1, 2022}
+\newcommand{\hmwkClass}{Science of Programming}
+\newcommand{\hmwkClassID}{CS 536}
+\newcommand{\hmwkClassInstructor}{Stefan Muller}
+\newcommand{\hmwkAuthorName}{\textbf{Mark Gameng}}
+
+%
+% Title Page
+%
+
+\author{\hmwkAuthorName}
+\date{}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\answer}{\item[]} %new code
+
+\begin{document}
+	
+	%\maketitle
+	
+	\section{Task 1.1}
+	
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\answer
+			$\begin{aligned}[t]
+				&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad &\{n \geq 0\} \\
+				&1\; i := 0 &\{n \geq 0 \land i = 0\} \\
+				&2\; s := 0 &\{n \geq 0 \land i = 0 \land s = 0\} \Rightarrow \{p\} \\
+				&3\; \{\textbf{inv p} = \; \; \; i \leq n \land s = i^2\} \\
+				&4\; \text{while}(i < n)\{ &\{p \land i < n\} \Rightarrow \{i + 1 \leq n \land s + (2 * i + 1) = (i + 1)^2\} \\
+				&5\; \quad s := s + (2 * i + 1) &\{i + 1 \leq n \land s = (i + 1)^2\} \\
+				&6\; \quad i := i + 1 &\{p\} \\
+				&7\; \} &\{p \land i \geq n\} \Rightarrow \{s = n^2\} \\
+				&\\
+				&\text{Line 4 proof obligation is proven by the hint} \\
+				&i^2 = (i + 1)^2 - 2i - 1 \equiv (i + 1)^2 = i^2 + 2i + 1 \\
+				&\text{With} \; s = i^2 \; \text{then} \; s + (2 * i + 1) = (i + 1)^2 \\
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+	\section{Task 1.2}
+	
+	\begin{enumerate}[label={(\alph*)}]
+		
+		\answer
+		$\begin{aligned}[t]
+			&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad &\{n \geq 0\} \\
+			&1\; i := 0 &\{n \geq 0 \land i = 0\} \\
+			&2\; s := 0 &\{n \geq 0 \land i = 0 \land s = 0\} \Rightarrow \{p\} \\
+			&3\; \{\textbf{inv p} = \; \; \; i \leq n \land s = i^2\} \\
+			&4\; \text{while}(i < n)\{ &\{p \land i < n\} \nRightarrow \{i + 1 \leq n \land s + (2 * i) = (i + 1)^2\} \\
+			&5\; \quad s := s + (2 * i) &\{i + 1 \leq n \land s = (i + 1)^2\} \\
+			&6\; \quad i := i + 1 &\{p\} \\
+			&7\; \} &\{p \land i \geq n\} \Rightarrow \{s = n^2\} \\
+			&\\
+			&\text{Line 4 is the bug as it is invalid} \\
+			&s + (2 * i) \equiv i^2 + 2i \; \text{and} \; i^2 + 2i \neq (i + 1)^2
+		\end{aligned}$
+		
+	\end{enumerate}
+	
+	\section{Task 2.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\answer In the dafny file, \textbf{sumarray.dfy}.
+			
+		\end{enumerate}
+	
+	\section{Task 2.2}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\answer In the dafny file, \textbf{find.dfy}.
+			
+		\end{enumerate}
+	
+	\section{Task 2.3}
+	\begin{enumerate}[label = {(\alph*)}]
+		
+		\answer In the dafny file, \textbf{posneg.dfy}.
+		
+	\end{enumerate}
+	
+	\pagebreak
+	
+	\section{Task 3.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item
+			$\begin{aligned}[t]
+				&wlp(a[x = 0 ? i : j] := 1, a[i] = 1) \\
+				&= \; \; \; [1/a[x = 0 ? i : j]](a[i] = 1)\\
+				&= \; \; \; x = 0 ? [1 / a[i]](a[i] = 1) : [1 / a[j]](a[i] = 1)\\
+				&= \; \; \; x = 0 ? 1 = 1 : a[i] = 1 \\
+				&= \; \; \; x = 0 ? \text{T} : a[i] = 1 \\
+				&= \; \; \; x = 0 \lor a[i] = 1 \\
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				&\text{let} \; e_{2} = [5/a[i]](a[1]) \equiv \; i = 1 ? 5 : a[1] \\
+				&wlp(a[i] := 5, a[a[1]] = 5) \\
+				&= \; \; \; e_{2} = i ? 5 = 5 : a[e_{2}] = 5 \\
+				&= \; \; \; e_{2} = i \lor a[e_{2}] = 5 \\
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				&wlp(a[j] := a[i] + 1, a[j] > a[i]) \\
+				&= \; \; \; [a[i] + 1 / a[j]](a[j] > a[i]) \\
+				&= \; \; \; [a[i] + 1 / a[j]]a[j] > [a[i] + 1 / a[j]][a[i]] \\
+				&= \; \; \; a[i] + 1 > (i = j ? a[i] + 1 : a[i]) \\
+				&= \; \; \; i = j ? a[i] + 1 > a[i] + 1 : a[i] + 1 > a[i] \\
+				&= \; \; \; i = j ? F : T \\
+				&= \; \; \; i \neq j \\
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+	\section{Task 4.1}
+		\begin{itemize}
+			
+			\answer I spent about 4 hours on this.
+			
+		\end{itemize}
+	
+\end{document}
