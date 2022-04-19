@@ -1,0 +1,253 @@
+% https://github.com/jdavis/latex-homework-template
+% https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts} % for "\mathbb" macro
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usetikzlibrary{automata,positioning}
+\newcommand{\indentitem}{\setlength\itemindent{25pt}}
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClassID\ \hmwkTitle}
+\rhead{} % blank, to remove the latest section in page
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\setcounter{secnumdepth}{0}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#6}
+\newcommand{\hmwkDueDate}{April 18, 2022}
+\newcommand{\hmwkClass}{Science of Programming}
+\newcommand{\hmwkClassID}{CS 536}
+\newcommand{\hmwkClassInstructor}{Stefan Muller}
+\newcommand{\hmwkAuthorName}{\textbf{Mark Gameng}}
+
+%
+% Title Page
+%
+
+\author{\hmwkAuthorName}
+\date{}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\answer}{\item[]} %new code
+
+\begin{document}
+	
+	%\maketitle
+	
+	\section{Task 1.1}
+	
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\answer
+			$\begin{aligned}[t]
+				& \qquad \qquad \qquad \qquad &[n > 0] \\
+				&i := n; &[n > 0 \land i = n]\\
+				&\{\textbf{inv } i > 0 \} \\
+				&\{\textbf{dec } i \} \\
+				&\text{while}(i > 1)\{ &[i > 0 \land i > 1 \land i = i_{0}] \Rightarrow [i/2 > 0 \land i / 2 < i_{0}]\\
+				&\quad i := i / 2 &[i > 0 \land i < i_{0}]\\
+				&\} &[n > 0 \land i = 1] \\
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+	\section{Task 1.2}
+	
+	\begin{enumerate}[label={(\alph*)}]
+		
+		\answer
+		$\begin{aligned}[t]
+			&\qquad \qquad \qquad \qquad &[|a| \geq 1 \land i = 0 \land a[i] \geq 1] \\
+			&x := 1; \\
+			&k := 0; \\
+			&\{\textbf{inv } x = 2^k \land x \leq a[i] \} \\
+			&\{\textbf{dec } a[i] - x * 2 \} \\
+			&\text{while}(x * 2 \leq a[i]) \{ \\
+			&\quad k := k + 1 \\
+			&\quad x := x * 2 \\
+			&\} &[x = 2^k \land x \leq a[i] \land a[i] < 2^{k+1}] \\
+		\end{aligned}$
+		
+	\end{enumerate}
+	
+	\section{Task 2.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\answer 
+			\begin{table}[H]
+				\begin{tabular}{lll}
+					state $\sigma$ & $P_{1}$ & $P_{2}$ \\
+					$\sigma \models e_{1} \land e_{2}$ & Executes $s_{1}$ & Executes $s_{1} \; \square \; s_{2}$ \\
+					$\sigma \models e_{1} \land \neg e_{2}$ & Executes $s_{1}$ & Executes $s_{1}$ \\
+					$\sigma \models \neg e_{1} \land e_{2}$ & Executes $s_{2}$ & Executes $s_{2}$ \\
+					$\sigma \models \neg e_{1} \land \neg e_{2}$ & Executes $s_{2}$ & $\bot_{e}$ \\
+				\end{tabular}
+			\end{table}
+			
+		\end{enumerate}
+	
+	\pagebreak
+	
+	\section{Task 2.2}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\item
+			$\begin{aligned}[t]
+				&M(\text{havoc }i; a[i] = 1, \sigma) \\
+				&= \bigcup_{\sigma^{'} \in \{\sigma[i \mapsto n] | n \in \Z\}} M(a[i] = 1, \sigma^{'}) \\
+				&= \{\sigma[a[\sigma^{'}(i)] \mapsto 1]\} \\
+				&\text{or can just do this?} \\
+				&= \{\sigma[a[\sigma[i \mapsto n]] \mapsto 1] \; | \; n \in Z\} \\
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				&M(\text{while }\{x > -10 \land x < 10 \to x := x + 1 \; \square \; x > -10 \land x < 10 \to x := x - 1\}, \{x = 1\}) \\
+				&= \{\{x = 10\}, \{x = -10\}\} \\
+				&\text{With $\{x = 1\}$, both guards are true, so the program either keeps decrementing or incrementing x} \\ &\text{until it is either 10 or -10 non-deterministically.} \\
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				&M(\text{branch }\{x \geq y \to x := x + 2 \; \square \; y \geq x \to y := y + 1\}, \{x = 3, y = 3\} \\
+				&= M(x := x + 2, \{x = 3, y = 3\}) \cup M(y := y + 1, \{x = 3, y = 3\}) \\
+				&= \{\{x = 5, y = 3\}\} \cup \{\{x = 3, y = 4\}\} \\
+				&= \{\{x = 5, y = 3\}, \{x = 3, y = 4\}\} \\
+				&\text{Thus,} \\
+				&M((\text{branch }\{x \geq y \to x := x + 2 \; \square \; y \geq x \to y := y + 1\}); \; \text{if }(x < y) \; \text{then }\{z := y\} \\
+				&\text{else }\{z := x\}, \{x = 3, y = 3\}) \\
+				&= \bigcup_{\sigma^{'} \in \{\{x = 5, y = 3\}, \{x = 3, y = 4\}\}} M(\text{if }(x < y) \; \text{then }\{z := y\}\; \text{else }\{z := x\}, \sigma^{'})\\
+				&= \{\{x = 5, y = 3, z = 5\}, \{x = 3, y = 4, z = 4\}\}
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+	\section{Task 2.3}
+	\begin{enumerate}[label = {(\alph*)}]
+		
+		\item
+		$\begin{aligned}[t]
+			&wlp(\text{branch } \{x \geq y \to max := x \; \square \; y \geq x \to max := y\}, max \geq 0) \\
+			&= (x \geq y \to wlp(max := x, max \geq 0)) \land (y \geq x \to wlp(max := y, max \geq 0)) \\
+			&= (x \geq y \to [x/max](max \geq 0)) \land (y \geq x \to [y/max](max \geq 0)) \\
+			&= (x \geq y \to x \geq 0) \land (y \geq x \to y \geq 0)
+		\end{aligned}$
+		
+		\item
+		$\begin{aligned}[t]
+			&sp(x \geq y, \text{branch } \{x \geq y \to y := y + 1 \; \square \; y \geq x \to x := x + 1\}) \\
+			&= sp(x \geq y \land x \geq y, y := y + 1) \land sp(x \geq y \land y \geq x, x := x + 1) \\
+			&= sp(x \geq y, y := y + 1) \land sp(x = y, x := x + 1) \\
+			&= ([y_{0}/y](x \geq y) \land y = [y_{0}/y](y + 1)) \land ([x_{0}/x](x = y) \land x = [x_{0}/x](x + 1)) \\
+			&= (x \geq y_{0} \land y = y_{0} + 1)  \land (x_{0} = y \land x = x_{0} + 1) \\
+		\end{aligned}$
+		
+		\item
+		$\begin{aligned}[t]
+			&wlp(\text{havoc } x ; y := y + 1, y \geq \tfrac{x}{|x|}) \\
+			&= wlp(\text{havoc } x, wlp(y := y + 1, y \geq \tfrac{x}{|x|})) \\
+			&= wlp(\text{havoc } x, y + 1 \geq \tfrac{x}{|x|})\\
+			&= \forall x_{0} \in \Z . [x_{0}/x](y + 1 \geq \tfrac{x}{|x|}) \\
+			&= \forall x_{0} \in \Z . y + 1 \geq \tfrac{x_{0}}{|x_{0}|} \\
+		\end{aligned}$
+		
+	\end{enumerate}
+	
+	\section{Task 3.1}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\answer $s \equiv [y := x / 3 || x := x + 6 ; z := x * 2]$ and $\sigma = \{x = 18\}$ 
+			
+			\item
+			$\begin{aligned}[t]
+				&\qquad &<s, \sigma> \qquad & \\
+				&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \swarrow & &\searrow \\
+				&<[skip || x := x + 6; z := x * 2], \{x = 18, y = 6\}> & &<[y := x / 3 || skip], \{x = 24, z = 48\}> \\
+				&\qquad \qquad \qquad \qquad \downarrow & &\qquad \qquad \qquad \qquad \downarrow \\
+				&<[skip || skip], \{x = 24, y = 6, z = 48\}> & &<[skip || skip], \{x = 24, z = 48, y = 8\}> \\
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				&M(s, \sigma) = \{\{x = 24, y = 6, z = 48\}, \{x = 24, z = 48, y = 8\}\} \\
+				&\text{Looking at the evaluation graph, the ending states have $x = 24, z = 48$ and either $y = 6$ or $y = 8$.} \\
+				&\text{This is due to using $x$ in an assignment ($y := x / 3$) and updating it ($x := x + 6$) as well.} \\ 
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+	\section{Task 4.1}
+		\begin{itemize}
+			
+			\answer I spent about 4 hours on this.
+			
+		\end{itemize}
+	
+\end{document}

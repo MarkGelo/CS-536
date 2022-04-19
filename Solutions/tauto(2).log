@@ -1,0 +1,9 @@
+ T => ((P -> Q) /\ ~P) \/ P
+T
+T \/ Q							Dom
+(T \/ Q) /\ T					Conj(3, 2)
+(T \/ Q) /\ (~P \/ P)			LEM
+((~P \/ P) \/ Q) /\ (~P \/ P)	LEM
+((~P \/ Q) \/ P) /\ (~P \/ P)	CAI
+((~P \/ Q) /\ ~P) \/ P			Dist
+((P -> Q) /\ ~P) \/ P			DC
