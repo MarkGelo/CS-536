@@ -1,0 +1,129 @@
+% https://github.com/jdavis/latex-homework-template
+% https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts} % for "\mathbb" macro
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usetikzlibrary{automata,positioning}
+\newcommand{\indentitem}{\setlength\itemindent{25pt}}
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClassID\ \hmwkTitle}
+\rhead{} % blank, to remove the latest section in page
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\setcounter{secnumdepth}{0}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{}
+\newcommand{\hmwkDueDate}{April 18, 2022}
+\newcommand{\hmwkClass}{Science of Programming}
+\newcommand{\hmwkClassID}{CS 536}
+\newcommand{\hmwkClassInstructor}{Stefan Muller}
+\newcommand{\hmwkAuthorName}{\textbf{Mark Gameng}}
+
+%
+% Title Page
+%
+
+\author{\hmwkAuthorName}
+\date{}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\newcommand{\answer}{\item[]} %new code
+
+\begin{document}
+	
+	%\maketitle
+	
+	\section{Practice Problems}
+	
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\item
+			$\begin{aligned}[t]
+				&wlp(i := 2; a[j] := a[i] * i, a[i] = 3) \\
+				&= wlp(i := 2, wlp(a[j] := a[i] * i, a[i] = 3)) \\ 
+				&= wlp(i := 2, i = j ? a[i] * i = 3 : a[i] = 3) \\
+				&= j = 2 \; ? \; a[2] * 2 = 3 : a[2] = 3 \\
+				&= j = 2 \; ? \; a[2] = \tfrac{3}{2} : a[2] = 3 \\
+			\end{aligned}$
+			
+			\item
+			$\begin{aligned}[t]
+				&wlp(x := y, z := x / y, z \geq 9) \\
+				&= wlp(x := y, wlp (z := \tfrac{x}{y}, z \geq 9)) \\
+				&= wlp(x := y, \tfrac{x}{y} \geq 9) \\
+				&= \tfrac{y}{y} \geq 9 \\
+				&= 1 \geq 9 \\
+				&= F
+			\end{aligned}$
+			
+		\end{enumerate}
+	
+\end{document}
