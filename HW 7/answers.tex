@@ -56,8 +56,8 @@
 %   - Author
 %
 
-\newcommand{\hmwkTitle}{Homework\ \#6}
-\newcommand{\hmwkDueDate}{April 18, 2022}
+\newcommand{\hmwkTitle}{Homework\ \#7}
+\newcommand{\hmwkDueDate}{April 28, 2022}
 \newcommand{\hmwkClass}{Science of Programming}
 \newcommand{\hmwkClassID}{CS 536}
 \newcommand{\hmwkClassInstructor}{Stefan Muller}
@@ -106,50 +106,105 @@
 		\begin{enumerate}[label={(\alph*)}]
 			
 			\answer
-			$\begin{aligned}[t]
-				& \qquad \qquad \qquad \qquad &[n > 0] \\
-				&i := n; &[n > 0 \land i = n]\\
-				&\{\textbf{inv } i > 0 \} \\
-				&\{\textbf{dec } i \} \\
-				&\text{while}(i > 1)\{ &[i > 0 \land i > 1 \land i = i_{0}] \Rightarrow [i/2 > 0 \land i / 2 < i_{0}]\\
-				&\quad i := i / 2 &[i > 0 \land i < i_{0}]\\
-				&\} &[n > 0 \land i = 1] \\
-			\end{aligned}$
+			\begin{tabular}{c c c c c}
+				i & j & Change(i) & Vars(j) & i intf w j \\
+				s1 & s2 & $r1, i1$ & $n, r2, i2$ & no \\
+				s2 & s1 & $r2, i2$ & $n, r1, i1$ & no \\ 
+			\end{tabular}
 			
 		\end{enumerate}
 	
 	\section{Task 1.2}
 	
-	\begin{enumerate}[label={(\alph*)}]
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\answer
+			$\begin{aligned}[t]
+				&\qquad \qquad \qquad \qquad &\{n \geq 0\} \\
+				&i1 := 0; \\
+				&r1 := 0; &\{n \geq 0 \land i1 = 0 \land r1 = 0\} \\
+				&\{\textbf{inv } r1 = sum(0, i1) \land i1 \leq n / 2 \} \\
+				&\text{while } (i1 < n / 2) \{ \\
+				&\quad r1 := r1 + 1; \\
+				&\quad i1 := i1 + 1; \\
+				&\} &\{r1 = sum(0, n/2)\} \\
+				&i2 := n / 2; \\
+				&r2 := 0; &\{r1 = sum(0, n/2) \land i2 = n / 2 \land r2 = 0\} \\
+				&\{\textbf{inv } r1 = sum(0, n/2) \land r2 = sum(n / 2, i2) \land i2 \leq n\} \\
+				&\text{while } (i2 < n) \{ \\
+				&\quad r2 := r2 + i2; \\
+				&\quad i2 := i2 + 1; \\
+				&\} &\{r1 = sum(0, n/2) \land r2 = sum(n/2, n)\} \\
+				& &\Rightarrow \{r1 + r2 = sum(0, n)\} \\
+				&r := r1 + r2; \\
+				& &\{r = sum(0, n)\} \\
+			\end{aligned}$
+			
+		\end{enumerate}
+
+	\section{Task 1.3}
+	
+		\begin{enumerate}[label={(\alph*)}]
+			
+			\answer
+			$\begin{aligned}[t]
+				&\qquad \qquad \qquad \qquad &\{n \geq 0\} \\
+				&[ &\{p_{1} \equiv n \geq 0\} \\
+				&i1 := 0; \\
+				&r1 := 0; \\
+				&\{\textbf{inv } r1 = sum(0, i1) \land i1 \leq n / 2\} \\
+				&\text{while }(i1 < n / 2) \{ \\
+				&\quad r1 := r1 + i1; \\
+				&\quad i1 := i1 + 1; \\ 
+				&\} &\{q_{1} \equiv r1 = sum(0, n / 2)\} \\
+				&|| &\{p_{2} \equiv n \geq 0\} \\ 
+				&i2 := n / 2; \\
+				&r2 := 0; \\
+				&\{\textbf{inv } r2 = sum(n / 2, i2) \land i2 \leq n\} \\
+				&\text{while } (i2 < n) \{ \\
+				&\quad r2 := r2 + i2; \\
+				&\quad i2 := i2 + 1; \\
+				&\} &\{q_{2} \equiv r2 = sum(n / 2, n)\} \\
+				&] &\{q_{1} \land q_{2}\} \Rightarrow \{r1 + r2 = sum(0, n)\} \\
+				&r := r1 + r2 \\
+				& &\{r = sum(0, n)\}
+			\end{aligned}$
 		
-		\answer
-		$\begin{aligned}[t]
-			&\qquad \qquad \qquad \qquad &[|a| \geq 1 \land i = 0 \land a[i] \geq 1] \\
-			&x := 1; \\
-			&k := 0; \\
-			&\{\textbf{inv } x = 2^k \land x \leq a[i] \} \\
-			&\{\textbf{dec } a[i] - x * 2 \} \\
-			&\text{while}(x * 2 \leq a[i]) \{ \\
-			&\quad k := k + 1 \\
-			&\quad x := x * 2 \\
-			&\} &[x = 2^k \land x \leq a[i] \land a[i] < 2^{k+1}] \\
-		\end{aligned}$
-		
-	\end{enumerate}
+			\begin{tabular}{c c c c c c c}
+				i & j & Change(i) & Vars(j) & FV(j) & i intf w j & i intf w cond j \\
+				s1 & s2 & $r1, i1$ & $n, r2, i2$ & $r2, n$ & no & no \\
+				s2 & s1 & $r2, i2$ & $n, r1, i1$ & $r1, n$ & no & no \\ 
+			\end{tabular}
+			
+		\end{enumerate}
+	
+	\pagebreak
 	
 	\section{Task 2.1}
 		\begin{enumerate}[label = {(\alph*)}]
 			
-			\answer 
-			\begin{table}[H]
-				\begin{tabular}{lll}
-					state $\sigma$ & $P_{1}$ & $P_{2}$ \\
-					$\sigma \models e_{1} \land e_{2}$ & Executes $s_{1}$ & Executes $s_{1} \; \square \; s_{2}$ \\
-					$\sigma \models e_{1} \land \neg e_{2}$ & Executes $s_{1}$ & Executes $s_{1}$ \\
-					$\sigma \models \neg e_{1} \land e_{2}$ & Executes $s_{2}$ & Executes $s_{2}$ \\
-					$\sigma \models \neg e_{1} \land \neg e_{2}$ & Executes $s_{2}$ & $\bot_{e}$ \\
-				\end{tabular}
-			\end{table}
+			\answer
+			$\begin{aligned}[t]
+				&\qquad \qquad \qquad \qquad &\{n \geq 0 \land i1 = 0 \land r1 = 0\} \\
+				&[ &\{n / 2 \leq i2 \leq n \land i1 = 0 \land r2 = sum(n / 2, i2) \land r1 = 0\}\\
+				&\{\textbf{inv } i1 \leq n / 2 \land n / 2 \leq i2 \leq n \land r2 = sum(n / 2, i2)\} \\
+				&\text{while }(i1 < n / 2) \{ \\
+				&\quad < r1 := r1 + i1; \\
+				&\quad i1 := i1 + 1; > \\
+				&\} &\{r1 = sum(0, n / 2)\} \\
+				&|| &\{0 \leq i1 \leq n / 2 \land i2 = n / 2 \land r1 = sum(0, i1) \land r2 = 0\} \\
+				&\{\textbf{inv } i2 \leq n \land i1 \leq n / 2 \land r1 = sum(0, i1)\} \\
+				&\text{while }(i2 < n) \{ \\
+				&\quad r2 := r2 + i2; \\
+				&\quad i2 := i2 + 1; \\
+				&\} &\{r2 = sum(n / 2, n)\} \\
+				&\{\textbf{inv } i1 \leq n / 2 \land r1 = sum(0, i1) \land r2 = sum(n / 2, n)\} \\
+				&\text{while } i1 < n / 2 \{skip\} &\{r1 = sum(0, n / 2) \land r2 = sum(n / 2, n)\} \\
+				& &\Rightarrow \{r1 + r2 = sum(0, n)\} \\
+				&r := r1 + r2 \\
+				&] \\
+				& &\{r = sum(0, n)\}
+ 			\end{aligned}$
 			
 		\end{enumerate}
 	
@@ -158,96 +213,41 @@
 	\section{Task 2.2}
 		\begin{enumerate}[label = {(\alph*)}]
 			
-			\item
-			$\begin{aligned}[t]
-				&M(\text{havoc }i; a[i] = 1, \sigma) \\
-				&= \bigcup_{\sigma^{'} \in \{\sigma[i \mapsto n] | n \in \Z\}} M(a[i] = 1, \sigma^{'}) \\
-				&= \{\sigma[a[\sigma^{'}(i)] \mapsto 1]\} \\
-				&\text{or can just do this?} \\
-				&= \{\sigma[a[\sigma[i \mapsto n]] \mapsto 1] \; | \; n \in Z\} \\
-			\end{aligned}$
-			
-			\item
-			$\begin{aligned}[t]
-				&M(\text{while }\{x > -10 \land x < 10 \to x := x + 1 \; \square \; x > -10 \land x < 10 \to x := x - 1\}, \{x = 1\}) \\
-				&= \{\{x = 10\}, \{x = -10\}\} \\
-				&\text{With $\{x = 1\}$, both guards are true, so the program either keeps decrementing or incrementing x} \\ &\text{until it is either 10 or -10 non-deterministically.} \\
-			\end{aligned}$
-			
-			\item
-			$\begin{aligned}[t]
-				&M(\text{branch }\{x \geq y \to x := x + 2 \; \square \; y \geq x \to y := y + 1\}, \{x = 3, y = 3\} \\
-				&= M(x := x + 2, \{x = 3, y = 3\}) \cup M(y := y + 1, \{x = 3, y = 3\}) \\
-				&= \{\{x = 5, y = 3\}\} \cup \{\{x = 3, y = 4\}\} \\
-				&= \{\{x = 5, y = 3\}, \{x = 3, y = 4\}\} \\
-				&\text{Thus,} \\
-				&M((\text{branch }\{x \geq y \to x := x + 2 \; \square \; y \geq x \to y := y + 1\}); \; \text{if }(x < y) \; \text{then }\{z := y\} \\
-				&\text{else }\{z := x\}, \{x = 3, y = 3\}) \\
-				&= \bigcup_{\sigma^{'} \in \{\{x = 5, y = 3\}, \{x = 3, y = 4\}\}} M(\text{if }(x < y) \; \text{then }\{z := y\}\; \text{else }\{z := x\}, \sigma^{'})\\
-				&= \{\{x = 5, y = 3, z = 5\}, \{x = 3, y = 4, z = 4\}\}
-			\end{aligned}$
+			\answer These two proof outlines are interference-free because one thread doesn't invalidate any condition needed by the other thread. Every atomic statement $\{r\} <s> \{...\}$ in $s_{1}^{*}$ doesn't interfere with the proof outline $\{p2\}\; s_{2}^{*} \;\{q2\}$. So, the proof outline $\{p1\}\; s_{1}^{*} \;\{q1\}$ does not interfere with the other proof outline $\{p2\}\; s_{2}^{*} \;\{q2\}$.
 			
 		\end{enumerate}
-	
-	\section{Task 2.3}
-	\begin{enumerate}[label = {(\alph*)}]
-		
-		\item
-		$\begin{aligned}[t]
-			&wlp(\text{branch } \{x \geq y \to max := x \; \square \; y \geq x \to max := y\}, max \geq 0) \\
-			&= (x \geq y \to wlp(max := x, max \geq 0)) \land (y \geq x \to wlp(max := y, max \geq 0)) \\
-			&= (x \geq y \to [x/max](max \geq 0)) \land (y \geq x \to [y/max](max \geq 0)) \\
-			&= (x \geq y \to x \geq 0) \land (y \geq x \to y \geq 0)
-		\end{aligned}$
-		
-		\item
-		$\begin{aligned}[t]
-			&sp(x \geq y, \text{branch } \{x \geq y \to y := y + 1 \; \square \; y \geq x \to x := x + 1\}) \\
-			&= sp(x \geq y \land x \geq y, y := y + 1) \land sp(x \geq y \land y \geq x, x := x + 1) \\
-			&= sp(x \geq y, y := y + 1) \land sp(x = y, x := x + 1) \\
-			&= ([y_{0}/y](x \geq y) \land y = [y_{0}/y](y + 1)) \land ([x_{0}/x](x = y) \land x = [x_{0}/x](x + 1)) \\
-			&= (x \geq y_{0} \land y = y_{0} + 1)  \land (x_{0} = y \land x = x_{0} + 1) \\
-		\end{aligned}$
-		
-		\item
-		$\begin{aligned}[t]
-			&wlp(\text{havoc } x ; y := y + 1, y \geq \tfrac{x}{|x|}) \\
-			&= wlp(\text{havoc } x, wlp(y := y + 1, y \geq \tfrac{x}{|x|})) \\
-			&= wlp(\text{havoc } x, y + 1 \geq \tfrac{x}{|x|})\\
-			&= \forall x_{0} \in \Z . [x_{0}/x](y + 1 \geq \tfrac{x}{|x|}) \\
-			&= \forall x_{0} \in \Z . y + 1 \geq \tfrac{x_{0}}{|x_{0}|} \\
-		\end{aligned}$
-		
-	\end{enumerate}
 	
 	\section{Task 3.1}
 		\begin{enumerate}[label = {(\alph*)}]
 			
-			\answer $s \equiv [y := x / 3 || x := x + 6 ; z := x * 2]$ and $\sigma = \{x = 18\}$ 
+			\answer Instead of \{while $(i1 < n / 2) \{skip\}; \; r := r1 + r2$\}, I just use \{await $i1 = n / 2$ then $r := r1 + r2$\}
 			
-			\item
-			$\begin{aligned}[t]
-				&\qquad &<s, \sigma> \qquad & \\
-				&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \swarrow & &\searrow \\
-				&<[skip || x := x + 6; z := x * 2], \{x = 18, y = 6\}> & &<[y := x / 3 || skip], \{x = 24, z = 48\}> \\
-				&\qquad \qquad \qquad \qquad \downarrow & &\qquad \qquad \qquad \qquad \downarrow \\
-				&<[skip || skip], \{x = 24, y = 6, z = 48\}> & &<[skip || skip], \{x = 24, z = 48, y = 8\}> \\
-			\end{aligned}$
+		\end{enumerate}
+	
+	\section{Task 3.2}
+		\begin{enumerate}[label = {(\alph*)}]
 			
-			\item
-			$\begin{aligned}[t]
-				&M(s, \sigma) = \{\{x = 24, y = 6, z = 48\}, \{x = 24, z = 48, y = 8\}\} \\
-				&\text{Looking at the evaluation graph, the ending states have $x = 24, z = 48$ and either $y = 6$ or $y = 8$.} \\
-				&\text{This is due to using $x$ in an assignment ($y := x / 3$) and updating it ($x := x + 6$) as well.} \\ 
-			\end{aligned}$
+			\answer It's preferable to use await instead of a loop because the loop is wasteful. While it does work, it repeatedly checks to see if the condition is true. With await, once it checks the condition and it's false, it gets blocked, and waits until the condition is true. So, other threads are run nondeterministically and only goes back to the thread with the await if the condition becomes true.
 			
 		\end{enumerate}
 	
 	\section{Task 4.1}
-		\begin{itemize}
+		\begin{enumerate}[label = {(\alph*)}]
 			
-			\answer I spent about 4 hours on this.
+			\item The problem is that, the "wait" in thread 2, is no longer doing what it's intended. It no longer waits for the other thread, thread 1, to run and finish because it already satisfies the condition even before running thread 1. If thread 2 starts from the beginning, it can finish the whole thing because of the invalid initial conditions in the precondition as well as the initial state $\sigma$. So, with the given $\sigma$, we get $r = r1 + r2 = 523752 + sum(18, 26)$, just from running and finishing thread 2. It then goes to thread 1, and finally gives the correct value, $r1 = sum(0, n / 2)$, however that's all thread 1 does. So, we end in a state where $r \neq sum(0, 26)$.
 			
-		\end{itemize}
+			\item Expected number of times to find the bug in testing is $(1.3 * 10^{14}) / 78 \approx 1.66 * 10^{12}$. This means, if you run the program $1.6$ trillion times you are expected to encounter one buggy execution path. Having a script running 1000 times per second, it will still take you $1.66$ billion seconds, or $19,290$ days, or $52.85$ years to find the bug.
+			
+			\item $(1.66 * 10^{12}) / (10^{11}) \approx 16.66$ days. It is expected to take about $17$ days for a user to discover the bug. 
+			
+			\item Testing is not the best way make sure a program does what it's intended and doesn't have any bugs, as indicated by the above answers. It can take days, months, or even more for testing to find a bug. By the time your tests find the bug, or enough users finds and reports the bug, it will already have been too late and the damage has been done. For a mission critical system, testing is not enough and program verification is a must. As such, it is a good thing that I took CS 536 and learned about program verification.
+			
+		\end{enumerate}
 	
+	\section{Task 5}
+		\begin{enumerate}[label = {(\alph*)}]
+			
+			\answer I spent about 5 hours on this.
+			
+		\end{enumerate}
 \end{document}
